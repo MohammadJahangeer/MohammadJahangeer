@@ -1,3 +1,3 @@
 - 👋 Hi, I am Mohammad Jahangeer
 - 👀 I’m interested in .NET Programming
-- 📫 How to reach me @ jak1singh@gmail.com
+- 📫 Mail to reach me @ jak1singh@gmail.com
