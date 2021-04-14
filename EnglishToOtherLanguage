@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+<script src="jquery.js"></script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+        function Convert_En_Ot(EnglishText, ReturnCtrlID) {
+var LanCode='Hi';
+if(document.getElementById("Hi").checked) LanCode='hi';
+if(document.getElementById("Pa").checked) LanCode='pa';
+if(document.getElementById("Ur").checked) LanCode='ur';
+debugger;
+            $.ajax({
+                type: "POST",
+                url: 'https://www.google.com/inputtools/request?ime=transliteration_en_'+LanCode+'&text=' + EnglishText,
+                dataType: "json",
+                success: function (data) {
+                    document.getElementById(ReturnCtrlID).innerHTML = data[1][0][1];
+                },
+                error: function () {
+                    return true; console.log("Panjuabi Translation cannot be done.");
+                }
+            });
+        }
+
+function FontSize(val){
+var str=document.getElementById("resize").style.fontSize;
+str.replace("px", "");
+var size=parseInt(str);
+
+if(val=='R') size=14;
+if(val=='P') size+=2;
+if(val=='M') size-=2;
+
+
+str=size+"px";
+
+document.getElementById('resize').style.fontSize=str;
+
+}
+    </script>
+<style>
+.heading{
+padding:10px;
+border:solid 2px #2ea219;
+border-radius:5px;
+margin-bottom:15px;
+background-color:#4dc737;
+text-align:center;
+color:#fff;
+}
+.container{
+padding:20px 20px 10px 20px;
+}
+.label{
+width:200px;
+padding:3px;
+}
+input[type=text]
+{
+border-radius:5px;
+border:solid 2px silver;
+height:25px;
+width:200px;
+}
+
+</style>
+</head>
+<body>
+<h1 class="heading">
+English to Other Language
+</h1>
+<div class="container">
+<strong>Notes:
+</strong>
+English to other language project contains the code to change the typed English text in other language. This project will helpful to implement 
+
+the project like, if we want to type name in English and name in Hindi convert automatically without help of copying the converted text from 
+
+the other source. The source code is available here with a running demo.<br/><br/>
+</div>
+<div class="container">
+<b>Select Language</b>
+<input type="radio" id="Hi" name="Language" checked>Hindi</input>
+<input type="radio" id="Pa" name="Language">Punjabi</input>
+<input type="radio" id="Ur" name="Language">Urdu</input>
+
+<br/><br/><br/>
+
+
+
+<div class="label"> Enter Name in English </div> 
+<input type="text" id="txtEng" onblur="Convert_En_Ot(this.value,'resize')"/><br/>
+<div class="label"> Name in Hindi <small>(Read Only) </small> </div> 
+<div id="resize" style="min-height:25px;font-size:14px;padding: 2px;"></div>
+
+<input type="button" value=" A " onClick="FontSize('R')"/>
+<input type="button" value=" A+ " onClick="FontSize('P')"/> 
+<input type="button" value=" A- " onClick="FontSize('M')"/>
+</div>
+</body>
+
+</head>
